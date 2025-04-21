@@ -1,4 +1,31 @@
+# Ignore Python virtual environments
+/vote/venv/
+
+# Ignore Python bytecode files
 *.pyc
+*.pyo
+*.pyd
+__pycache__/
+
+# Ignore environment variable files (e.g., .env)
+.env
+
+# Ignore IDE/editor directories and files
+.vscode/
+.idea/
+
+# Ignore macOS and Windows system files
+.DS_Store
+Thumbs.db
+
+# Ignore Python packaging artifacts
+*.egg
+*.egg-info
+dist/
+build/
+*.log
+
+# Others
 project.lock.json
 bin/
 obj/

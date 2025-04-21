@@ -1,1 +1,24 @@
+# Ignore Python virtual environments
+/vote/venv/
+
+# Ignore Python bytecode files
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+
+# Ignore environment variable files (e.g., .env)
+.env
+
+# Ignore version control and IDE files
+.git
+.vscode/
+.idea/
+
+# Ignore Docker build artifacts
+*.log
+Dockerfile*
+docker-compose.yml
+
+# Others
 node_modules/

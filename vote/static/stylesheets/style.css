@@ -27,12 +27,28 @@ button i{
   margin-top: 3px;
 }
 
-button.a{
+#bloc{
   background-color: #1aaaf8;
 }
 
-button.b{
-  background-color: #00cbca;
+#consv{
+  background-color: blue;
+}
+
+#lib {
+  background-color: red;
+}
+
+#ndp {
+  background-color: orange;
+}
+
+#other {
+  background-color: grey;
+}
+
+#none {
+  background-color: black;
 }
 
 #tip{
@@ -75,13 +91,6 @@ button.b{
   vertical-align: middle;
   font-size: 3em;
 }
-#choice a{
-  text-decoration:none;
-}
-#choice a:hover, #choice a:focus{
-  outline:0;
-  text-decoration:underline;
-}
 
 #choice button{
   display: block;
@@ -98,20 +107,14 @@ button.b{
   padding-left: 50px;
 }
 
-#choice button.a:hover{
-  background-color: #1488c6;
+#choice button:focus{
+  background-color: white;
+  text-decoration:underline;
 }
 
-#choice button.b:hover{
-  background-color: #00a2a1;
-}
-
-#choice button.a:focus{
-  background-color: #1488c6;
-}
-
-#choice button.b:focus{
-  background-color: #00a2a1;
+#choice button:hover{
+  background-color: black;
+  text-decoration: solid;
 }
 
 #background-stats{

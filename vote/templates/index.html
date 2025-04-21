@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>{{option_a}} vs {{option_b}}!</title>
+    <title>Canada Votes 2025!</title>
     <base href="/index.html">
     <meta name = "viewport" content = "width=device-width, initial-scale = 1.0">
     <meta name="keywords" content="docker-compose, docker, stack">
@@ -13,16 +13,17 @@
   <body>
     <div id="content-container">
       <div id="content-container-center">
-        <h3>{{option_a}} vs {{option_b}}!</h3>
+        <h3>Who's Your Vote?</h3>
         <form id="choice" name='form' method="POST" action="/">
-          <button id="a" type="submit" name="vote" class="a" value="a">{{option_a}}</button>
-          <button id="b" type="submit" name="vote" class="b" value="b">{{option_b}}</button>
+          <button id="bloc" type="submit" name="vote" class="voteBtn" value="Bloc">{{option_bloc}}</button>
+          <button id="consv" type="submit" name="vote" class="voteBtn" value="Conservative">{{option_consv}}</button>
+          <button id="lib" type="submit" name="vote" class="voteBtn" value="Liberal">{{option_lib}}</button>
+          <button id="ndp" type="submit" name="vote" class="voteBtn" value="NDP">{{option_ndp}}</button>
+          <button id="other" type="submit" name="vote" class="voteBtn" value="Other">{{option_other}}</button>
+          <button id="none" type="submit" name="vote" class="voteBtn" value="Not_Voting">{{option_none}}</button>
         </form>
         <div id="tip">
-          (Tip: you can change your vote)
-        </div>
-        <div id="hostname">
-          Processed by container ID {{hostname}}
+          (Tip: You can vote only once!)
         </div>
       </div>
     </div>
@@ -31,18 +32,16 @@
 
     {% if vote %}
     <script>
-      var vote = "{{vote}}";
-
-      if(vote == "a"){
-        $(".a").prop('disabled', true);
-        $(".a").html('{{option_a}} <i class="fa fa-check-circle"></i>');
-        $(".b").css('opacity','0.5');
-      }
-      if(vote == "b"){
-        $(".b").prop('disabled', true);
-        $(".b").html('{{option_b}} <i class="fa fa-check-circle"></i>');
-        $(".a").css('opacity','0.5');
-      }
+      $('form').on('click', 'input[type="submit"]', function() {
+        var submitValue = $(this).val();
+        $(".voteBtn").prop('disabled', true);
+        $(".voteBtn").filter(function() {
+          return $(this).val() === submitValue;
+        }).html(submitValue + ' <i class="fa fa-check-circle"></i>');
+        $(".voteBtn").filter(function() {
+          return $(this).val() !== submitValue;
+        }).css('opacity','0.5');
+      });
     </script>
     {% endif %}
   </body>

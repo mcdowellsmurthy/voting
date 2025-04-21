@@ -6,8 +6,13 @@ import random
 import json
 import logging
 
-option_a = os.getenv('OPTION_A', "Cats")
-option_b = os.getenv('OPTION_B', "Dogs")
+option_bloc = os.getenv('OPTION_BLOC', "Bloc")
+option_consv = os.getenv('OPTION_CONSV', "Conservative")
+option_lib = os.getenv('OPTION_LIB', "Liberal")
+option_ndp = os.getenv('OPTION_NDP', "NDP")
+option_other = os.getenv('OPTION_OTHER', "Other")
+option_none = os.getenv('OPTION_NONE', "Not_Voting")
+
 hostname = socket.gethostname()
 
 app = Flask(__name__)
@@ -38,8 +43,12 @@ def hello():
 
     resp = make_response(render_template(
         'index.html',
-        option_a=option_a,
-        option_b=option_b,
+        option_bloc=option_bloc,
+        option_consv=option_consv,
+        option_lib=option_lib,
+        option_ndp=option_ndp,
+        option_other=option_other,
+        option_none=option_none,
         hostname=hostname,
         vote=vote,
     ))
