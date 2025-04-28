@@ -1,0 +1,63 @@
+name: Snyk Security Scan
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  snyk-code-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Snyk
+        uses: snyk/actions/setup@master
+      - name: Snyk Code Scan
+        run: snyk code test
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+  # snyk-container-scan:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - name: Build container image
+  #       run: docker build -t test-image:latest ./path-to-dockerfile
+  #     - name: Set up Snyk
+  #       uses: snyk/actions/setup@master
+  #     - name: Snyk Container Scan
+  #       run: snyk container test test-image:latest
+  #       env:
+  #         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+  snyk-container-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Docker Compose
+        run: docker-compose up -d
+      - name: Set up Snyk
+        uses: snyk/actions/setup@master
+      - name: Get container images
+        id: get-images
+        run: echo "::set-output name=images::$(docker-compose images -q | tr '\n' ' ')"
+      - name: Snyk Container Scan
+        run: |
+          for IMAGE in ${{ steps.get-images.outputs.images }}; do
+            snyk container test $IMAGE --file=docker-compose.yml
+          done
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+  snyk-iac-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Snyk
+        uses: snyk/actions/setup@master
+      - name: Snyk IaC Scan
+        run: snyk iac test ./k8s-specifications
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
