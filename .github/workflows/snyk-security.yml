@@ -39,6 +39,6 @@ jobs:
       - name: Set up Snyk
         uses: snyk/actions/setup@master
       - name: Snyk IaC Scan
-        run: snyk iac test ./path-to-k8s-manifests
+        run: snyk iac test ./k8s-specifications
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
