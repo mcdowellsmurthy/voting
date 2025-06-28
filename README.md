@@ -1,5 +1,5 @@
 Instavote
-=========
+========
 
 Getting started
 ---------------
