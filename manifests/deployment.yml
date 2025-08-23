@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: mcdowellsmurthyvoting 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mcdowellsmurthyvoting
+  template:
+    metadata:
+      labels:
+        app: mcdowellsmurthyvoting 
+    spec:
+      containers:
+        - name: mcdowellsmurthyvoting 
+          image: azurecicdacr.azurecr.io/mcdowellsmurthyvoting
+          ports:
+          - containerPort: 80
