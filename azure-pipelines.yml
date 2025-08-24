@@ -52,7 +52,7 @@ stages:
   - deployment: Deploy
     displayName: Deploy
     pool:
-      vmImage: $(vmImageName)
+      name: helm
     environment: 'mcdowellsmurthyvoting.helm'
     strategy:
       runOnce:
