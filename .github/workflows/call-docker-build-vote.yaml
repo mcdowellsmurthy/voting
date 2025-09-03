@@ -33,10 +33,10 @@ jobs:
     secrets:
 
       # Only needed if with:dockerhub-enable is true below
-      dockerhub-username: ${{ secrets.DOCKE_USERNAME }}
+      dockerhub-username: ${{ secrets.DOCKERHUB_USERNAME }}
 
       # Only needed if with:dockerhub-enable is true below
-      dockerhub-token: ${{ secrets.DOCKER_PASSWORD }}
+      dockerhub-token: ${{ secrets.DOCKERHUB_TOKEN }}
 
     with:
       
