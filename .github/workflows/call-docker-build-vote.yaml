@@ -19,24 +19,23 @@ on:
       - '.github/workflows/call-docker-build-vote.yaml'
 
 jobs:
-  call-docker-build:
+docker:
+runs-on: ubuntu-latest
+steps:
+- name: Checkout code
+uses: actions/checkout@v4
 
-    name: Vote Call Docker Build
+- name: Log in to Docker Hub
+uses: docker/login-action@v2
+with:
+username: ${{ secrets.DOCKERHUB_USERNAME }}
+password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-    uses: dockersamples/.github/.github/workflows/reusable-docker-build.yaml@main
+- name: Build Docker image
+run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/voting:latest .
 
-    permissions:
-      contents: read
-      packages: write # needed to push docker image to ghcr.io
-      pull-requests: write # needed to create and update comments in PRs
-    
-    secrets:
-
-      # Only needed if with:dockerhub-enable is true below
-      dockerhub-username: ${{ secrets.DOCKERHUB_USERNAME }}
-
-      # Only needed if with:dockerhub-enable is true below
-      dockerhub-token: ${{ secrets.DOCKERHUB_TOKEN }}
+- name: Push Docker image
+run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/voting:latest
 
     with:
       
